@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BarangRequest;
+use App\Http\Requests\GalleryRequest;
 use App\Models\Barang;
+use App\Models\Gallerie;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
-class BarangController extends Controller
+class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $products = Barang::all();
-        return view('pages.admin.barang.index', compact('products'));
+        $galleries = Gallerie::with('barang')->get();
+        return view('pages.admin.gallery.index', compact('galleries'));
     }
 
     /**
@@ -28,7 +28,8 @@ class BarangController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.barang.tambah');
+        $barang = Barang::all();
+        return view('pages.admin.gallery.tambah', compact('barang'));
     }
 
     /**
@@ -37,14 +38,9 @@ class BarangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BarangRequest $request)
+    public function store(GalleryRequest $request)
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->nama);
-
-        Barang::create($data);
-
-        return redirect()->route('barang.index');
+        //
     }
 
     /**
@@ -66,8 +62,7 @@ class BarangController extends Controller
      */
     public function edit($id)
     {
-        $barang = Barang::findorFail($id);
-        return view('pages.admin.barang.edit', compact('barang'));
+        //
     }
 
     /**
@@ -77,16 +72,9 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BarangRequest $request, $id)
+    public function update(GalleryRequest $request, $id)
     {
-        $barang = Barang::findorFail($id);
-
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
-
-        $barang->update($data);
-
-        return redirect()->route('barang.index');
+        //
     }
 
     /**
@@ -97,7 +85,6 @@ class BarangController extends Controller
      */
     public function destroy($id)
     {
-        Barang::findorFail($id)->delete();
-        return redirect()->back();
+        //
     }
 }

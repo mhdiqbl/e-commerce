@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BarangController;
+use App\Http\Controllers\Admin\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,8 @@ Route::group(['middleware' => 'auth'],function(){
             return view('pages.admin.dashboard');
         })->name('admin.dashboard');
         Route::resource('barang', BarangController::class);
+        Route::resource('gallery', GalleryController::class);
     });
-
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
