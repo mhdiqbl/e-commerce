@@ -21,8 +21,9 @@
                             @forelse ($galleries as $gallerie)
                                 <tr>
                                     <td class="serial">{{ $loop->iteration }}</td>
-                                    <td> <span class="name">{{ $gallerie->$barang->nama }}</span> </td>
-                                    <td> <img src="{{ $gallerie->image }}" alt="" class="figure-img img-fluid rounded">
+                                    <td> <span class="name">{{ $gallerie->barang->nama }}</span> </td>
+                                    <td> <img src="{{ Storage::url($gallerie->image) }}" width="300px" alt=""
+                                            class="figure-img img-fluid rounded">
                                     </td>
                                     <td>
                                         <a href="{{ route('gallery.edit', $gallerie->id) }}"

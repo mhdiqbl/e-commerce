@@ -7,6 +7,7 @@ use App\Http\Requests\GalleryRequest;
 use App\Models\Barang;
 use App\Models\Gallerie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class GalleryController extends Controller
 {
@@ -40,7 +41,13 @@ class GalleryController extends Controller
      */
     public function store(GalleryRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['image'] = $request->file('image')->store(
+            'asset/product',
+            'public'
+        );
+        Gallerie::create($data);
+        return redirect()->route('gallery.index');
     }
 
     /**
@@ -62,7 +69,8 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $gallerie = Gallerie::findorFail($id);
+        return view('pages.admin.gallery.edit', compact('gallerie'));
     }
 
     /**
@@ -74,7 +82,17 @@ class GalleryController extends Controller
      */
     public function update(GalleryRequest $request, $id)
     {
-        //
+        $gallerie = Gallerie::findorFail($id);
+
+        $data = $request->all();
+        $data['image'] = $request->file('image')->store(
+            'asset/product',
+            'public'
+        );
+
+        $gallerie->update($data);
+
+        return redirect()->route('gallery.index');
     }
 
     /**

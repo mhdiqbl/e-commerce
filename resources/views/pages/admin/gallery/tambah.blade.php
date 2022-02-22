@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content">
-        <form action="{{ route('gallery.store') }}" method="post">
+        <form action="{{ route('gallery.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             @if ($errors->any())
                 <div class="alert alert-danger">

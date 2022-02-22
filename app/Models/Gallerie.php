@@ -15,6 +15,7 @@ class Gallerie extends Model
         'image',
     ];
 
+    //relasi ke tabel barang
     public function barang()
     {
         return $this->belongsTo(Barang::class);
