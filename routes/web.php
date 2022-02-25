@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/user2','layouts.home');
+Route::get('/',[HomeController::class, 'index']);
 Route::view('/product','pages.user.product');
 Route::view('/card','pages.user.card');
 Route::group(['middleware' => 'auth'],function(){
@@ -27,6 +28,7 @@ Route::group(['middleware' => 'auth'],function(){
         Route::resource('gallery', GalleryController::class);
     });
 });
+
 
 
 

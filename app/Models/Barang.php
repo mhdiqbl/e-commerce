@@ -24,4 +24,9 @@ class Barang extends Model
         'create_at',
         'update_at',
     ];
+
+    public function galleries()
+    {
+        return $this->hasMany(Gallerie::class);
+    }
 }
