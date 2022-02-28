@@ -17,4 +17,13 @@ class HomeController extends Controller
         // dd($gambar);
         return view('pages.user.home', compact('products'));
     }
+    public function show($slug)
+    {
+        $product = Barang::with('galleries')
+            ->where('slug',$slug)
+            ->first();
+
+        $products = Barang::with('galleries')->limit(4)->get();
+        return view('pages.user.product', compact('product','products'));
+    }
 }

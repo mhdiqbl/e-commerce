@@ -103,6 +103,7 @@ class GalleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Gallerie::findorFail($id)->delete();
+        return redirect()->back();
     }
 }
