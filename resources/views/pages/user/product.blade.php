@@ -47,8 +47,8 @@
                         <div class="col-lg-6">
                             <div class="product-details">
                                 <div class="pd-title">
-                                    <span>oranges</span>
-                                    <h3>Pure Pineapple</h3>
+                                    <span>{{ $product->type }}</span>
+                                    <h3>{{ $product->nama }}</h3>
                                     <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
                                 </div>
                                 <div class="pd-rating">
@@ -61,34 +61,23 @@
                                 </div>
                                 <div class="pd-desc">
                                     <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Corporis, error officia. Rem aperiam laborum voluptatum
-                                        vel, pariatur modi hic provident eum iure natus quos non a
-                                        sequi, id accusantium! Autem.
+                                        {{ $product->description }}
                                     </p>
-                                    <p>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Quam possimus quisquam animi, commodi, nihil voluptate
-                                        nostrum neque architecto illo officiis doloremque et
-                                        corrupti cupiditate voluptatibus error illum. Commodi
-                                        expedita animi nulla aspernatur. Id asperiores blanditiis,
-                                        omnis repudiandae iste inventore cum, quam sint molestiae
-                                        accusamus voluptates ex tempora illum sit perspiciatis.
-                                        Nostrum dolor tenetur amet, illo natus magni veniam quia
-                                        sit nihil dolores. Commodi ratione distinctio harum
-                                        voluptatum velit facilis voluptas animi non laudantium, id
-                                        dolorem atque perferendis enim ducimus? A exercitationem
-                                        recusandae aliquam quod. Itaque inventore obcaecati, unde
-                                        quam impedit praesentium veritatis quis beatae ea atque
-                                        perferendis voluptates velit architecto?
-                                    </p>
-                                    <h4>$495.00 <span>629.99</span></h4>
+                                    <h4>Rp. {{ $product->type }}</h4>
                                 </div>
                                 <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1" />
-                                    </div>
-                                    <a href="#" class="primary-btn pd-cart">Add To Cart</a>
+                                    @auth
+                                        <form action="{{ route('card.add', $product->id) }}" method="post">
+                                            @csrf
+                                            <div class="pro-qty">
+                                                <input type="text" name="quantity" value="1" />
+                                            </div>
+                                            <button class="primary-btn pd-cart" type="submit">Add to Cart</button>
+                                        </form>
+                                    @endauth
+                                    @guest
+                                        <a href="{{ route('login') }}" class="primary-btn pd-cart">Login</a>
+                                    @endguest
                                 </div>
                             </div>
                         </div>

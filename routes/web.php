@@ -18,15 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class, 'index']);
 Route::get('product/{slug}', [HomeController::class, 'show'])->name('product.show');
 Route::view('/product','pages.user.product');
-Route::view('/card','pages.user.card');
 Route::group(['middleware' => 'auth'],function(){
-    //route
+    //admin
     Route::group(['prefix' => 'admin2'],function(){
         Route::get('/', function(){
             return view('pages.admin.dashboard');
         })->name('admin.dashboard');
         Route::resource('barang', BarangController::class);
         Route::resource('gallery', GalleryController::class);
+    });
+    //user
+    Route::group([],function(){
+        Route::get('/card',[HomeController::class, 'listCard'])->name('card.list');
+        Route::post('/card/{id}',[HomeController::class, 'addCard'])->name('card.add');
     });
 });
 
